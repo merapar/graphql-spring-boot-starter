@@ -17,8 +17,7 @@
   },
   "files":
   [
-    {"includePattern": "target/(.*.jar)", "excludePattern": "target/.*.zip$", "uploadPattern": "/$1"},
-    {"includePattern": "pom.xml", "uploadPattern": "spring-boot-starter-graphql-${project.version}.pom"}
+    {"includePattern": "target/(.*.jar)", "excludePattern": "target/.*.zip$", "uploadPattern": "/$1"}
   ],
   "publish": true
 }
