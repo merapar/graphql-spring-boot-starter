@@ -3,6 +3,6 @@ jdk: oraclejdk8
 deploy:
   provider: bintray
   skip_cleanup: true
-  file: target/bin/bintray.json
+  file: descriptor.json
   user: $BINTRAY_API_USER
   key: $BINTRAY_API_KEY

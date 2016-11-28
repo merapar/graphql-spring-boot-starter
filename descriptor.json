@@ -1,0 +1,24 @@
+{
+  "package": {
+    "name": "spring-boot-starter-graphql",
+    "repo": "maven",
+    "subject": "merapar",
+    "website_url": "https://www.merapartechnologies.com",
+    "issue_tracker_url": "https://github.com/merapar/spring-boot-starter-graphql/issues",
+    "vcs_url": "https://github.com/merapar/spring-boot-starter-graphql",
+    "licenses": ["MIT"],
+    "public_download_numbers": false,
+    "public_stats": false
+  },
+  "version": {
+    "name": "${project.version}",
+    "released": "${build.timestamp}",
+    "vcs_tag": "v${project.version}"
+  },
+  "files":
+  [
+    {"includePattern": "target/(.*.jar)", "excludePattern": "target/.*.zip$", "uploadPattern": "/$1"},
+    {"includePattern": "pom.xml", "uploadPattern": "spring-boot-starter-graphql-${project.version}.pom"}
+  ],
+  "publish": true
+}
