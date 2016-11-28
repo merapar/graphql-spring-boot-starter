@@ -11,9 +11,9 @@
     "public_stats": false
   },
   "version": {
-    "name": "0.0.1-SNAPSHOT",
+    "name": "0.0.1",
     "released": "2016-11-28",
-    "vcs_tag": "0.0.1-SNAPSHOT"
+    "vcs_tag": "0.0.1"
   },
   "files":
   [
