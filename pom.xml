@@ -61,7 +61,7 @@
                 </property>
             </activation>
             <properties>
-                <build.version>${env.TRAVIS_TAG}</build.version>
+                <build.version>${project.version}</build.version>
             </properties>
         </profile>
     </profiles>
