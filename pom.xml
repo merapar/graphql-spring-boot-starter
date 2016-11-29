@@ -14,7 +14,9 @@
         <relativePath/>
     </parent>
 
-    <name>spring-boot-starter-graphql</name>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>This is a Spring boot starter project for the GraphQL Java project.</description>
+    <url>https://github.com/merapar/spring-boot-starter-graphql</url>
     <inceptionYear>2016</inceptionYear>
 
     <licenses>
@@ -24,6 +26,21 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <developers>
+        <developer>
+            <name>Jan Fockaert</name>
+            <email>jan.fockaert@merapar.com</email>
+            <organization>Merapar Technologies</organization>
+            <organizationUrl>https://www.merapartechnologies.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/merapar/spring-boot-starter-graphql.git</connection>
+        <developerConnection>scm:git:ssh://github.com:merapar/spring-boot-starter-graphql.git</developerConnection>
+        <url>http://github.com/merapar/spring-boot-starter-graphql/tree/master</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -157,15 +174,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>
