@@ -12,7 +12,6 @@
   },
   "version": {
     "name": "@build.version@",
-    "released": "@build.timestamp@",
     "vcs_tag": "v@build.version@"
   },
   "files":
