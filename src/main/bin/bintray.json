@@ -11,13 +11,14 @@
     "public_stats": false
   },
   "version": {
-    "name": "0.0.1",
-    "released": "2016-11-28",
-    "vcs_tag": "0.0.1"
+    "name": "@project.version@",
+    "released": "@build.timestamp@",
+    "vcs_tag": "v@project.version@"
   },
   "files":
   [
-    {"includePattern": "target/(.*.jar)", "excludePattern": "target/.*.zip$", "uploadPattern": "/$1"}
+    {"includePattern": "target/(.*.jar)", "excludePattern": "target/.*.zip$", "uploadPattern": "com/merapar/spring-boot-starter-graphql/@project.version@-@build.timestamp@/$1"},
+    {"includePattern": "pom.xml", "uploadPattern": "com/merapar/spring-boot-starter-graphql/@project.version@-@build.timestamp@/spring-boot-starter-graphql-@project.version@.pom"}
   ],
   "publish": true
 }

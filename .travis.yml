@@ -1,8 +1,19 @@
 language: java
+
 jdk: oraclejdk8
+
+install: true
+
+cache:
+  directories:
+  - $HOME/.m2
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
 deploy:
   provider: bintray
   skip_cleanup: true
-  file: descriptor.json
+  file: target/bin/bintray.json
   user: $BINTRAY_API_USER
   key: $BINTRAY_API_KEY
