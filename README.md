@@ -75,9 +75,6 @@ Add the repository:
     <id>bintray-merapar-maven</id>
     <name>bintray</name>
     <url>http://dl.bintray.com/merapar/maven</url>
-    <snapshots>
-        <enabled>true</enabled>
-    </snapshots>
 </repository>
 
 ```
@@ -88,7 +85,7 @@ Dependency:
 <dependency>
     <groupId>com.merapar</groupId>
     <artifactId>spring-boot-starter-graphql</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-20161129.151404</version>
 </dependency>
 
 ```
