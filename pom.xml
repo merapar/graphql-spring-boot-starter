@@ -31,7 +31,23 @@
         <java.version>1.8</java.version>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
         <maven.build.timestamp.format>yyyyMMdd.HHmmss</maven.build.timestamp.format>
+        <build.version>${project.version}-${build.timestamp}</build.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>releasing</id>
+            <activation>
+                <property>
+                    <name>travis</name>
+                    <value>release</value>
+                </property>
+            </activation>
+            <properties>
+                <build.version>${env.TRAVIS_TAG}</build.version>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <!-- External -->
