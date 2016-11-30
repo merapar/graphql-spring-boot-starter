@@ -13,7 +13,7 @@
         <version>1.4.2.RELEASE</version>
     </parent>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>spring-boot-starter-graphql-parent</name>
     <description>This is a Spring boot starter project for the GraphQL Java project.</description>
     <url>https://github.com/merapar/spring-boot-starter-graphql</url>
     <inceptionYear>2016</inceptionYear>

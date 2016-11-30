@@ -13,7 +13,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>spring-boot-starter-graphql-sample</name>
     <description>This is a sample project for the Spring boot starter GraphQL project.</description>
     <url>https://github.com/merapar/spring-boot-starter-graphql</url>
     <inceptionYear>2016</inceptionYear>
