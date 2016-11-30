@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.LinkedHashMap;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @RunWith(SpringRunner.class)
@@ -47,5 +48,34 @@ public class GraphQlProcessorImplTest {
 
         // Then
         exception.isExactlyInstanceOf(GraphQlException.class).hasMessage("Incorrect variables");
+    }
+
+    @Test
+    public void processRequestWithoutVariables_shouldExecuteProcess() {
+        // Given
+        val request = new LinkedHashMap<String, Object>();
+        request.put("query", "dummy");
+        request.put("operationName", "dummy");
+
+        // When
+        val result = graphQlProcessor.processRequest(request);
+
+        // Then
+        assertThat(result).isNotNull();
+    }
+
+    @Test
+    public void processRequestWithEmptyString_shouldExecuteProcess() {
+        // Given
+        val request = new LinkedHashMap<String, Object>();
+        request.put("query", "dummy");
+        request.put("operationName", "dummy");
+        request.put("variables", "");
+
+        // When
+        val result = graphQlProcessor.processRequest(request);
+
+        // Then
+        assertThat(result).isNotNull();
     }
 }

@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.merapar</groupId>
+    <artifactId>spring-boot-starter-graphql-sample</artifactId>
+    <version>0.0.1</version>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>com.merapar</groupId>
+        <artifactId>spring-boot-starter-graphql-parent</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>This is a sample project for the Spring boot starter GraphQL project.</description>
+    <url>https://github.com/merapar/spring-boot-starter-graphql</url>
+    <inceptionYear>2016</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://github.com/merapar/spring-boot-starter-graphql/blob/master/LICENSE.md</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Jan Fockaert</name>
+            <email>jan.fockaert@merapar.com</email>
+            <organization>Merapar Technologies</organization>
+            <organizationUrl>https://www.merapartechnologies.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/merapar/spring-boot-starter-graphql.git</connection>
+        <developerConnection>scm:git:ssh://github.com:merapar/spring-boot-starter-graphql.git</developerConnection>
+        <url>http://github.com/merapar/spring-boot-starter-graphql/tree/master</url>
+    </scm>
+
+    <dependencies>
+        <!-- Own -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>spring-boot-starter-graphql</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- External -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

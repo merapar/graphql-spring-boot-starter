@@ -17,6 +17,8 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 
+import static graphql.Scalars.GraphQLString;
+import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
 import static graphql.schema.GraphQLObjectType.newObject;
 
 @ConditionalOnMissingBean(GraphQlSchemaBuilder.class)
@@ -24,29 +26,32 @@ import static graphql.schema.GraphQLObjectType.newObject;
 @Slf4j
 public class GraphQlSchemaBuilderImpl implements GraphQlSchemaBuilder {
 
-    @Autowired
     private ApplicationContext applicationContext;
-
-    @Autowired
-    private GraphQlProperties configuration;
+    private GraphQlProperties properties;
 
     @Getter
     private GraphQLSchema schema;
 
+    @Autowired
+    public GraphQlSchemaBuilderImpl(ApplicationContext applicationContext, GraphQlProperties properties) {
+        this.applicationContext = applicationContext;
+        this.properties = properties;
+    }
+
     @PostConstruct
-    public void GraphQlSchemaBuilderImpl() {
+    public void postContruct() {
 
         log.debug("Start building graphql schema");
 
-        GraphQLObjectType.Builder queryBuilder = newObject().name(configuration.getRootQueryName());
-        GraphQLObjectType.Builder mutationBuilder = newObject().name(configuration.getRootMutationName());
+        GraphQLObjectType.Builder queryBuilder = newObject().name(properties.getRootQueryName());
+        GraphQLObjectType.Builder mutationBuilder = newObject().name(properties.getRootMutationName());
 
-        if (StringUtils.hasText(configuration.getRootQueryDescription())) {
-            queryBuilder = queryBuilder.description(configuration.getRootQueryDescription());
+        if (StringUtils.hasText(properties.getRootQueryDescription())) {
+            queryBuilder = queryBuilder.description(properties.getRootQueryDescription());
         }
 
-        if (StringUtils.hasText(configuration.getRootMutationDescription())) {
-            mutationBuilder = mutationBuilder.description(configuration.getRootMutationDescription());
+        if (StringUtils.hasText(properties.getRootMutationDescription())) {
+            mutationBuilder = mutationBuilder.description(properties.getRootMutationDescription());
         }
 
         val fieldDefinitionBeans = applicationContext.getBeansWithAnnotation(GraphQlFields.class);
@@ -91,6 +96,24 @@ public class GraphQlSchemaBuilderImpl implements GraphQlSchemaBuilder {
             schemaBuilder = schemaBuilder.mutation(mutationBuilder.build());
         }
 
-        schema = schemaBuilder.build();
+        if (foundQueryDefinitions || foundMutationDefinitions) {
+            schema = schemaBuilder.build();
+        } else {
+            schema = generateGettingStartedGraphQlSchema();
+        }
+    }
+
+    private GraphQLSchema generateGettingStartedGraphQlSchema() {
+        val gettingStartedType = newObject()
+                .name("gettingStartedQuery")
+                .field(newFieldDefinition()
+                        .type(GraphQLString)
+                        .name("gettingStarted")
+                        .staticValue("Create a class with the @GraphQlFields annotation and implement interface BaseGraphQlFields."))
+                .build();
+
+        return GraphQLSchema.newSchema()
+                .query(gettingStartedType)
+                .build();
     }
 }

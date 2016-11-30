@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.merapar</groupId>
-    <artifactId>spring-boot-starter-graphql-parent</artifactId>
+    <artifactId>spring-boot-starter-graphql</artifactId>
     <version>0.0.1</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.2.RELEASE</version>
+        <groupId>com.merapar</groupId>
+        <artifactId>spring-boot-starter-graphql-parent</artifactId>
+        <version>0.0.1</version>
     </parent>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -41,34 +41,39 @@
         <url>http://github.com/merapar/spring-boot-starter-graphql/tree/master</url>
     </scm>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <build.timestamp>${maven.build.timestamp}</build.timestamp>
-        <maven.build.timestamp.format>yyyyMMdd.HHmmss</maven.build.timestamp.format>
-        <build.version>${project.version}-${build.timestamp}</build.version>
-    </properties>
+    <dependencies>
+        <!-- External -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java</artifactId>
+            <version>2.2.0</version>
+        </dependency>
 
-    <profiles>
-        <profile>
-            <id>releasing</id>
-            <activation>
-                <property>
-                    <name>travis</name>
-                    <value>release</value>
-                </property>
-            </activation>
-            <properties>
-                <build.version>${project.version}</build.version>
-            </properties>
-        </profile>
-    </profiles>
-
-    <modules>
-        <module>graphql-core</module>
-        <module>graphql-sample</module>
-    </modules>
+        <!-- Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -104,28 +109,6 @@
                         <phase>verify</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <inherited>false</inherited>
-                <configuration>
-                    <outputDirectory>${basedir}/target/bin</outputDirectory>
-                    <resources>
-                        <resource>
-                            <directory>src/main/bin</directory>
-                            <filtering>true</filtering>
-                        </resource>
-                    </resources>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>copy-resources</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
                         </goals>
                     </execution>
                 </executions>

@@ -8,11 +8,6 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class Scalars {
-
-    private Scalars() {
-        throw new IllegalAccessError("Scalars class");
-    }
-
     public final static GraphQLScalarType GraphQlInstant = new GraphQLScalarType("Instant", "Built-in java.time.Instant", new Coercing() {
 
         @Override
