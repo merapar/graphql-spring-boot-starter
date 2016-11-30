@@ -6,7 +6,7 @@ cache:
   directories:
   - $HOME/.m2
 
-install:
+script:
   - ./travis-build.sh
 
 after_success:
