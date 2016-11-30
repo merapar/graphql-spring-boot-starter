@@ -65,15 +65,19 @@ public class GraphQlSchemaBuilderImpl implements GraphQlSchemaBuilder {
             val fieldDefinitionInterface = (BaseGraphQlFields) fieldDefinition.getValue();
 
             if (fieldDefinitionInterface.getQueryFields() != null) {
-                queryBuilder = queryBuilder.fields(fieldDefinitionInterface.getQueryFields());
-
-                foundQueryDefinitions = fieldDefinitionInterface.getQueryFields().size() > 0;
+                val queryFields = fieldDefinitionInterface.getQueryFields();
+                if (queryFields != null && queryFields.size() > 0) {
+                    queryBuilder = queryBuilder.fields(queryFields);
+                    foundQueryDefinitions = true;
+                }
             }
 
             if (fieldDefinitionInterface.getMutationFields() != null) {
-                mutationBuilder = mutationBuilder.fields(fieldDefinitionInterface.getMutationFields());
-
-                foundMutationDefinitions = fieldDefinitionInterface.getMutationFields().size() > 0;
+                val mutationFields = fieldDefinitionInterface.getMutationFields();
+                if (mutationFields != null && mutationFields.size() > 0) {
+                    mutationBuilder = mutationBuilder.fields(mutationFields);
+                    foundMutationDefinitions = true;
+                }
             }
         }
 
