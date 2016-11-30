@@ -34,6 +34,44 @@ Check out the following documentation on [using spring boot starter](http://docs
 By adding Spring boot starter GraphQL as maven dependency on the application a @Controller will be created pointing to the configured request mapping with default "/v1/graphql".
 During startup all components that have the @GraphQlFields annotation and implements the interface "GraphQlFields" will be applied on the GraphQL schema exposed by the controller.
 
+An example from the sample project:
+```java
+package com.merapar.graphql.sample.fields;
+
+import com.merapar.graphql.base.AbstractBaseGraphQlFields;
+import com.merapar.graphql.definitions.BaseGraphQlFields;
+import com.merapar.graphql.definitions.GraphQlFields;
+import graphql.schema.GraphQLFieldDefinition;
+import org.springframework.stereotype.Component;
+
+import java.util.Collections;
+import java.util.List;
+
+import static graphql.Scalars.GraphQLString;
+import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
+
+@Component
+@GraphQlFields
+public class HelloWorldFields extends AbstractBaseGraphQlFields implements BaseGraphQlFields {
+
+    @Override
+    public List<GraphQLFieldDefinition> getQueryFields() {
+        return Collections.singletonList(
+                newFieldDefinition()
+                        .type(GraphQLString)
+                        .name("hello")
+                        .staticValue("world")
+                        .build()
+        );
+    }
+
+    @Override
+    public List<GraphQLFieldDefinition> getMutationFields() {
+        return Collections.emptyList();
+    }
+}
+```
+
 
 #### Configuration
 

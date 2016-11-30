@@ -18,3 +18,5 @@ deploy:
   file: target/bin/bintray.json
   user: $BINTRAY_API_USER
   key: $BINTRAY_API_KEY
+  on:
+    all_branches: true
