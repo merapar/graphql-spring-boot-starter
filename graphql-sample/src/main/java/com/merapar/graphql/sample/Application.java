@@ -1,4 +1,4 @@
-package com.merapar.grapqhql.sample;
+package com.merapar.graphql.sample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

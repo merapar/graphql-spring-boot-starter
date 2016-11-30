@@ -1,6 +1,8 @@
-package com.merapar.grapqhql.sample.fields;
+package com.merapar.graphql.sample.dataFetchers;
 
 import com.merapar.graphql.base.TypedValueMap;
+import com.merapar.graphql.sample.domain.Role;
+import com.merapar.graphql.sample.domain.User;
 import lombok.val;
 import org.springframework.stereotype.Component;
 
@@ -48,5 +50,9 @@ public class UserDataFetcher {
         users.remove(user.getId());
 
         return user;
+    }
+
+    public List<Role> getRoles(User user) {
+        return Arrays.asList(new Role(1, "Admin"));
     }
 }

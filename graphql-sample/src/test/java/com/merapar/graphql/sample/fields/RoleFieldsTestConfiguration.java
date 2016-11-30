@@ -9,17 +9,7 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import(GraphQlAutoConfiguration.class)
-public class UserFieldsTestConfiguration {
-
-    @Bean
-    public UserDataFetcher userDataFetcher() {
-        return new UserDataFetcher();
-    }
-
-    @Bean
-    public UserFields userFields() {
-        return new UserFields();
-    }
+public class RoleFieldsTestConfiguration {
 
     @Bean
     public RoleDataFetcher roleDataFetcher() {

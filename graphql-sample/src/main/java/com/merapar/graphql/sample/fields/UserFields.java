@@ -1,8 +1,10 @@
-package com.merapar.grapqhql.sample.fields;
+package com.merapar.graphql.sample.fields;
 
 import com.merapar.graphql.base.AbstractBaseGraphQlFields;
 import com.merapar.graphql.definitions.BaseGraphQlFields;
 import com.merapar.graphql.definitions.GraphQlFields;
+import com.merapar.graphql.sample.dataFetchers.UserDataFetcher;
+import com.merapar.graphql.sample.domain.User;
 import graphql.Scalars;
 import graphql.schema.*;
 import lombok.Getter;
@@ -29,26 +31,20 @@ public class UserFields extends AbstractBaseGraphQlFields implements BaseGraphQl
     @Autowired
     private UserDataFetcher userDataFetcher;
 
-    @Getter
+    @Autowired
+    private RoleFields roleFields;
+
     private GraphQLObjectType userType;
 
     private GraphQLInputObjectType addUserInputType;
     private GraphQLInputObjectType updateUserInputType;
     private GraphQLInputObjectType deleteUserInputType;
 
-    @Getter
     private GraphQLInputObjectType filterUserInputType;
 
-    @Getter
     private GraphQLFieldDefinition usersField;
-
-    @Getter
     private GraphQLFieldDefinition addUserField;
-
-    @Getter
     private GraphQLFieldDefinition updateUserField;
-
-    @Getter
     private GraphQLFieldDefinition deleteUserField;
 
     @Getter
@@ -68,7 +64,10 @@ public class UserFields extends AbstractBaseGraphQlFields implements BaseGraphQl
     private void createTypes() {
         userType = newObject().name("user").description("A user")
                 .field(newFieldDefinition().name("id").description("The id").type(GraphQLInt).build())
-                .field(newFieldDefinition().name("name").description("The network name").type(GraphQLString).build())
+                .field(newFieldDefinition().name("name").description("The name").type(GraphQLString).build())
+                .field(newFieldDefinition().name("roles").description("The roles").type(new GraphQLList(roleFields.getRoleType()))
+                        .dataFetcher(environment -> userDataFetcher.getRoles((User) environment.getSource()))
+                        .build())
                 .build();
 
         addUserInputType = newInputObject().name("addUserInput")
@@ -86,7 +85,7 @@ public class UserFields extends AbstractBaseGraphQlFields implements BaseGraphQl
                 .build();
 
         filterUserInputType = newInputObject().name("filterUserInput")
-                .field(newInputObjectField().name("id").type(GraphQLString).build())
+                .field(newInputObjectField().name("id").type(GraphQLInt).build())
                 .build();
     }
 

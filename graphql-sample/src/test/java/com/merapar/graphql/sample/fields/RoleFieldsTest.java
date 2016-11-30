@@ -1,8 +1,8 @@
 package com.merapar.graphql.sample.fields;
 
 import com.merapar.graphql.controller.GraphQlControllerImpl;
-import com.merapar.graphql.sample.domain.User;
-import com.merapar.graphql.sample.dataFetchers.UserDataFetcher;
+import com.merapar.graphql.sample.dataFetchers.RoleDataFetcher;
+import com.merapar.graphql.sample.domain.Role;
 import lombok.val;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -26,55 +26,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = UserFieldsTestConfiguration.class)
+@ContextConfiguration(classes = RoleFieldsTestConfiguration.class)
 @WebMvcTest(GraphQlControllerImpl.class)
-public class UserFieldsTest {
+public class RoleFieldsTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private UserDataFetcher userDataFetcher;
+    private RoleDataFetcher roleDataFetcher;
 
     @Before
     public void setup() {
-        userDataFetcher.users = new LinkedHashMap<>();
-        userDataFetcher.users.put(1, new User(1, "Jan", Collections.emptyList()));
-        userDataFetcher.users.put(2, new User(2, "Peter", Collections.emptyList()));
+        roleDataFetcher.roles = new LinkedHashMap<>();
+        roleDataFetcher.roles.put(1, new Role(1, "Admin"));
+        roleDataFetcher.roles.put(2, new Role(2, "User"));
     }
 
     @Test
-    public void getUsers() throws Exception {
+    public void getRoles() throws Exception {
         // Given
         val query = "{" +
-                "users {" +
-                "  id" +
-                "  name" +
-                "  roles {" +
-                "    id" +
-                "    name" +
-                "  }" +
-                "}}";
-
-        // When
-        val postResult = performGraphQlPost(query);
-
-        // Then
-        postResult.andExpect(status().isOk())
-                .andExpect(jsonPath("$.errors").doesNotExist())
-                .andExpect(jsonPath("$.data.users[0].id").value("1"))
-                .andExpect(jsonPath("$.data.users[0].name").value("Jan"))
-                .andExpect(jsonPath("$.data.users[0].roles[0].id").value(1))
-                .andExpect(jsonPath("$.data.users[0].roles[0].name").value("Admin"))
-                .andExpect(jsonPath("$.data.users[1].id").value("2"))
-                .andExpect(jsonPath("$.data.users[1].name").value("Peter"));
-    }
-
-    @Test
-    public void getUsersById() throws Exception {
-        // Given
-        val query = "{" +
-                "users(filter: { id: 2 }) {" +
+                "roles {" +
                 "  id" +
                 "  name" +
                 "}}";
@@ -85,15 +58,36 @@ public class UserFieldsTest {
         // Then
         postResult.andExpect(status().isOk())
                 .andExpect(jsonPath("$.errors").doesNotExist())
-                .andExpect(jsonPath("$.data.users[0].id").value("2"))
-                .andExpect(jsonPath("$.data.users[0].name").value("Peter"));
+                .andExpect(jsonPath("$.data.roles[0].id").value("1"))
+                .andExpect(jsonPath("$.data.roles[0].name").value("Admin"))
+                .andExpect(jsonPath("$.data.roles[1].id").value("2"))
+                .andExpect(jsonPath("$.data.roles[1].name").value("User"));
     }
 
     @Test
-    public void addUser() throws Exception {
+    public void getRolesById() throws Exception {
         // Given
-        val query = "mutation addUser($input: addUserInput!) {" +
-                "  addUser(input: $input) {" +
+        val query = "{" +
+                "roles(filter: { id: 2 }) {" +
+                "  id" +
+                "  name" +
+                "}}";
+
+        // When
+        val postResult = performGraphQlPost(query);
+
+        // Then
+        postResult.andExpect(status().isOk())
+                .andExpect(jsonPath("$.errors").doesNotExist())
+                .andExpect(jsonPath("$.data.roles[0].id").value("2"))
+                .andExpect(jsonPath("$.data.roles[0].name").value("User"));
+    }
+
+    @Test
+    public void addRole() throws Exception {
+        // Given
+        val query = "mutation addRole($input: addRoleInput!) {" +
+                "  addRole(input: $input) {" +
                 "    id" +
                 "    name" +
                 "  }\n" +
@@ -101,7 +95,7 @@ public class UserFieldsTest {
 
         val variables = new LinkedHashMap<>();
         variables.put("id", 1234);
-        variables.put("name", "added user");
+        variables.put("name", "added role");
 
         // When
         val postResult = performGraphQlPost(query, variables);
@@ -109,17 +103,17 @@ public class UserFieldsTest {
         // Then
         postResult.andExpect(status().isOk())
                 .andExpect(jsonPath("$.errors").doesNotExist())
-                .andExpect(jsonPath("$.data.addUser.id").value(1234))
-                .andExpect(jsonPath("$.data.addUser.name").value("added user"));
+                .andExpect(jsonPath("$.data.addRole.id").value(1234))
+                .andExpect(jsonPath("$.data.addRole.name").value("added role"));
 
-        assertThat(userDataFetcher.users).containsKeys(1234);
+        assertThat(roleDataFetcher.roles).containsKeys(1234);
     }
 
     @Test
-    public void updateUser() throws Exception {
+    public void updateRole() throws Exception {
         // Given
-        val query = "mutation updateUser($input: updateUserInput!) {" +
-                "  updateUser(input: $input) {" +
+        val query = "mutation updateRole($input: updateRoleInput!) {" +
+                "  updateRole(input: $input) {" +
                 "    id" +
                 "    name" +
                 "  }\n" +
@@ -127,7 +121,7 @@ public class UserFieldsTest {
 
         val variables = new LinkedHashMap<>();
         variables.put("id", 1);
-        variables.put("name", "updated user");
+        variables.put("name", "updated role");
 
         // When
         val postResult = performGraphQlPost(query, variables);
@@ -135,17 +129,17 @@ public class UserFieldsTest {
         // Then
         postResult.andExpect(status().isOk())
                 .andExpect(jsonPath("$.errors").doesNotExist())
-                .andExpect(jsonPath("$.data.updateUser.id").value(1))
-                .andExpect(jsonPath("$.data.updateUser.name").value("updated user"));
+                .andExpect(jsonPath("$.data.updateRole.id").value(1))
+                .andExpect(jsonPath("$.data.updateRole.name").value("updated role"));
 
-        assertThat(userDataFetcher.users.get(1).getName()).isEqualTo("updated user");
+        assertThat(roleDataFetcher.roles.get(1).getName()).isEqualTo("updated role");
     }
 
     @Test
-    public void deleteUser() throws Exception {
+    public void deleteRole() throws Exception {
         // Given
-        val query = "mutation deleteUser($input: deleteUserInput!) {" +
-                "  deleteUser(input: $input) {" +
+        val query = "mutation deleteRole($input: deleteRoleInput!) {" +
+                "  deleteRole(input: $input) {" +
                 "    id" +
                 "    name" +
                 "  }\n" +
@@ -160,10 +154,10 @@ public class UserFieldsTest {
         // Then
         postResult.andExpect(status().isOk())
                 .andExpect(jsonPath("$.errors").doesNotExist())
-                .andExpect(jsonPath("$.data.deleteUser.id").value(2))
-                .andExpect(jsonPath("$.data.deleteUser.name").value("Peter"));
+                .andExpect(jsonPath("$.data.deleteRole.id").value(2))
+                .andExpect(jsonPath("$.data.deleteRole.name").value("User"));
 
-        assertThat(userDataFetcher.users).containsKeys(1);
+        assertThat(roleDataFetcher.roles).containsKeys(1);
     }
 
     private ResultActions performGraphQlPost(String query) throws Exception {
