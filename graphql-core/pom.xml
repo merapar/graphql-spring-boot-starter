@@ -8,9 +8,9 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>com.merapar</groupId>
-        <artifactId>spring-boot-starter-graphql-parent</artifactId>
-        <version>1.0.0-alpha</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.2.RELEASE</version>
     </parent>
 
     <name>spring-boot-starter-graphql</name>
@@ -40,6 +40,12 @@
         <developerConnection>scm:git:ssh://github.com:merapar/spring-boot-starter-graphql.git</developerConnection>
         <url>http://github.com/merapar/spring-boot-starter-graphql/tree/master</url>
     </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
 
     <dependencies>
         <!-- External -->
