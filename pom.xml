@@ -4,7 +4,7 @@
 
     <groupId>com.merapar</groupId>
     <artifactId>spring-boot-starter-graphql-parent</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-alpha</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -47,23 +47,7 @@
         <java.version>1.8</java.version>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
         <maven.build.timestamp.format>yyyyMMdd.HHmmss</maven.build.timestamp.format>
-        <build.version>${project.version}-${build.timestamp}</build.version>
     </properties>
-
-    <profiles>
-        <profile>
-            <id>releasing</id>
-            <activation>
-                <property>
-                    <name>travis</name>
-                    <value>release</value>
-                </property>
-            </activation>
-            <properties>
-                <build.version>${project.version}</build.version>
-            </properties>
-        </profile>
-    </profiles>
 
     <modules>
         <module>graphql-core</module>

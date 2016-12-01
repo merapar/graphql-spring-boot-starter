@@ -11,15 +11,13 @@
     "public_stats": false
   },
   "version": {
-    "name": "@build.version@",
-    "vcs_tag": "v@build.version@"
+    "name": "@project.version@",
+    "vcs_tag": "v@project.version@"
   },
   "files":
   [
-    {"includePattern": "graphql-core/target/spring-boot-starter-graphql-@project.version@.jar", "uploadPattern": "com/merapar/spring-boot-starter-graphql/@build.version@/spring-boot-starter-graphql-@build.version@.jar"},
-    {"includePattern": "graphql-core/target/spring-boot-starter-graphql-@project.version@-sources.jar", "uploadPattern": "com/merapar/spring-boot-starter-graphql/@build.version@/spring-boot-starter-graphql-@build.version@-sources.jar"},
-    {"includePattern": "graphql-core/target/spring-boot-starter-graphql-@project.version@-javadoc.jar", "uploadPattern": "com/merapar/spring-boot-starter-graphql/@build.version@/spring-boot-starter-graphql-@build.version@-javadoc.jar"},
-    {"includePattern": "graphql-core/pom.xml", "uploadPattern": "com/merapar/spring-boot-starter-graphql/@build.version@/pom.xml"}
+    {"includePattern": "graphql-core/target/(.*.jar)", "uploadPattern": "com/merapar/spring-boot-starter-graphql/@project.version@/$1", "matrixParams": { "override": 1 }},
+    {"includePattern": "graphql-core/pom.xml", "uploadPattern": "com/merapar/spring-boot-starter-graphql/@project.version@/spring-boot-starter-graphql-@project.version@.pom", "matrixParams": { "override": 1 }}
   ],
   "publish": true
 }
