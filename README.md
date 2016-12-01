@@ -1,6 +1,7 @@
 [![Build Status](https://api.travis-ci.org/merapar/spring-boot-starter-graphql.svg?branch=master)](https://travis-ci.org/merapar/spring-boot-starter-graphql)
-[![Download](https://api.bintray.com/packages/merapar/maven/spring-boot-starter-graphql/images/download.svg)](https://bintray.com/merapar/maven/spring-boot-starter-graphql/_latestVersion)
 [![Code coverage](https://codecov.io/gh/merapar/spring-boot-starter-graphql/branch/master/graph/badge.svg)](https://codecov.io/gh/merapar/spring-boot-starter-graphql)
+[![Latest Release](https://maven-badges.herokuapp.com/maven-central/com.merapar/spring-boot-starter-graphql/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.merapar/spring-boot-starter-graphql/)
+[![Dev version](https://api.bintray.com/packages/merapar/maven/spring-boot-starter-graphql/images/download.svg)](https://bintray.com/merapar/maven/spring-boot-starter-graphql/_latestVersion)
 
 # Spring boot starter GraphQL
 
