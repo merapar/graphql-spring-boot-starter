@@ -99,7 +99,7 @@ Dependency:
 <dependency>
     <groupId>com.merapar</groupId>
     <artifactId>spring-boot-starter-graphql</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
 </dependency>
 
 ```
@@ -124,7 +124,7 @@ Dependency:
 <dependency>
     <groupId>com.merapar</groupId>
     <artifactId>spring-boot-starter-graphql</artifactId>
-    <version>0.0.1-20161129.151404</version>
+    <version>1.0.1-alpha</version>
 </dependency>
 
 ```
