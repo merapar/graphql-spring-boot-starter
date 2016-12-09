@@ -12,7 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = GraphQlPropertiesTestConfiguration.class)
 @SpringBootTest(properties = {
-        "com.merapar.graphql.executorThreadPoolSize=30",
         "com.merapar.graphql.rootQueryName=serviceQueries",
         "com.merapar.graphql.rootQueryDescription=The service for queries",
         "com.merapar.graphql.rootMutationName=serviceMutations",
@@ -25,7 +24,6 @@ public class GraphQlPropertiesTest {
 
     @Test
     public void testPropertyInjection() {
-        assertThat(graphQlProperties.getExecutorThreadPoolSize()).isEqualTo(30);
         assertThat(graphQlProperties.getRootQueryName()).isEqualTo("serviceQueries");
         assertThat(graphQlProperties.getRootQueryDescription()).isEqualTo("The service for queries");
         assertThat(graphQlProperties.getRootMutationName()).isEqualTo("serviceMutations");

@@ -9,10 +9,6 @@ public class GraphQlProperties {
 
     @Getter
     @Setter
-    private Integer executorThreadPoolSize = 20;
-
-    @Getter
-    @Setter
     private String rootQueryName = "queries";
 
     @Getter

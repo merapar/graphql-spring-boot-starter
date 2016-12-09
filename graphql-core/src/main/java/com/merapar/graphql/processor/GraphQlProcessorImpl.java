@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.merapar.graphql.GraphQlException;
 import com.merapar.graphql.GraphQlProperties;
-import com.merapar.graphql.schema.GraphQlSchemaBuilder;
-import graphql.GraphQL;
-import graphql.execution.ExecutorServiceExecutionStrategy;
+import com.merapar.graphql.executor.GraphQlExecutor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +12,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.concurrent.Executors;
+import java.util.*;
 
 @ConditionalOnMissingBean(GraphQlProcessor.class)
 @Component
@@ -31,23 +24,13 @@ public class GraphQlProcessorImpl implements GraphQlProcessor {
     private GraphQlProperties configuration;
 
     @Autowired
-    private GraphQlSchemaBuilder schema;
-
-    @Autowired
     private ObjectMapper jacksonObjectMapper;
 
-    private GraphQL graphql;
+    @Autowired
+    private GraphQlExecutor graphQlExecutor;
 
     private TypeReference<HashMap<String, Object>> typeRefReadJsonString = new TypeReference<HashMap<String, Object>>() {
     };
-
-    @PostConstruct
-    public void construct() {
-        val executorService = Executors.newFixedThreadPool(configuration.getExecutorThreadPoolSize());
-        val executionStrategy = new ExecutorServiceExecutionStrategy(executorService);
-
-        graphql = new GraphQL(schema.getSchema(), executionStrategy);
-    }
 
     @Override
     public Object processRequest(Map requestBody) {
@@ -55,7 +38,8 @@ public class GraphQlProcessorImpl implements GraphQlProcessor {
         val operationName = (String) requestBody.get("operationName");
         val variables = getVariablesFromRequest(requestBody);
 
-        val executionResult = graphql.execute(query, operationName, null, variables);
+        val executionResult = graphQlExecutor.getGraphQl().execute(query, operationName, null, variables);
+
         val result = new LinkedHashMap<String, Object>();
 
         if (executionResult.getErrors().size() > 0) {
