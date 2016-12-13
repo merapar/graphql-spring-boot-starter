@@ -80,13 +80,16 @@ The following default properties can be configured via properties file:
 
 ```yaml
 com.merapar.graphql:
-  executorThreadPoolSize: 20
   rootQueryName: "queries"
   rootQueryDescription: ""
   rootMutationName: "mutations"
   rootMutationDescription: ""
   requestMapping:
     path: "/v1/graphql"
+  executor:
+    minimumThreadPoolSize: 10
+    maximumThreadPoolSize: 20
+    keepAliveTimeInSeconds: 30
     
 ```
 

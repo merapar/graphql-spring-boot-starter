@@ -1,15 +1,19 @@
 package com.merapar.graphql.controller;
 
 import com.merapar.graphql.processor.GraphQlProcessor;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
 
 @ConditionalOnMissingBean(GraphQlController.class)
 @Controller
+@Slf4j
 public class GraphQlControllerImpl implements GraphQlController {
 
     @Autowired
@@ -22,6 +26,12 @@ public class GraphQlControllerImpl implements GraphQlController {
     )
     @ResponseBody
     public Object executeOperation(@RequestBody Map body) {
-        return graphQlProcessor.processRequest(body);
+        val uuid = UUID.randomUUID().toString();
+
+        log.debug("Start processing graphQL request {}", uuid);
+        val requestResult = graphQlProcessor.processRequest(body);
+        log.debug("Finished processing graphQL request {}", uuid);
+
+        return requestResult;
     }
 }
