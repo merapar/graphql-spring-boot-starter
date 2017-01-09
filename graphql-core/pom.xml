@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.2.RELEASE</version>
+        <version>1.4.3.RELEASE</version>
     </parent>
 
     <name>spring-boot-starter-graphql</name>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java</artifactId>
-            <version>2.2.0</version>
+            <version>2.3.0</version>
         </dependency>
 
         <!-- Test -->
