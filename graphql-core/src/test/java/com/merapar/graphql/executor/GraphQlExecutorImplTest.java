@@ -1,4 +1,4 @@
-package com.merapar.graphql.processor;
+package com.merapar.graphql.executor;
 
 import com.merapar.graphql.GraphQlException;
 import lombok.val;
@@ -14,11 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = GraphQlProcessorImplTestConfiguration.class)
-public class GraphQlProcessorImplTest {
+@ContextConfiguration(classes = GraphQlExecutorImplTestConfiguration.class)
+public class GraphQlExecutorImplTest {
 
     @Autowired
-    private GraphQlProcessor graphQlProcessor;
+    private GraphQlExecutor graphQlExecutor;
 
     @Test
     public void processRequest_invalidVariablesJson_shouldThrowException() {
@@ -29,7 +29,7 @@ public class GraphQlProcessorImplTest {
         request.put("variables", "no JSON object");
 
         // When
-        val exception = assertThatThrownBy(() -> graphQlProcessor.processRequest(request));
+        val exception = assertThatThrownBy(() -> graphQlExecutor.executeRequest(request));
 
         // Then
         exception.isExactlyInstanceOf(GraphQlException.class).hasMessage("Cannot parse variables");
@@ -44,7 +44,7 @@ public class GraphQlProcessorImplTest {
         request.put("variables", 1234);
 
         // When
-        val exception = assertThatThrownBy(() -> graphQlProcessor.processRequest(request));
+        val exception = assertThatThrownBy(() -> graphQlExecutor.executeRequest(request));
 
         // Then
         exception.isExactlyInstanceOf(GraphQlException.class).hasMessage("Incorrect variables");
@@ -58,7 +58,7 @@ public class GraphQlProcessorImplTest {
         request.put("operationName", "dummy");
 
         // When
-        val result = graphQlProcessor.processRequest(request);
+        val result = graphQlExecutor.executeRequest(request);
 
         // Then
         assertThat(result).isNotNull();
@@ -73,7 +73,7 @@ public class GraphQlProcessorImplTest {
         request.put("variables", "");
 
         // When
-        val result = graphQlProcessor.processRequest(request);
+        val result = graphQlExecutor.executeRequest(request);
 
         // Then
         assertThat(result).isNotNull();

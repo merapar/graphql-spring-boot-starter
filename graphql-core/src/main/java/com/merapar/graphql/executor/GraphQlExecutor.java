@@ -1,7 +1,7 @@
 package com.merapar.graphql.executor;
 
-import graphql.GraphQL;
+import java.util.Map;
 
 public interface GraphQlExecutor {
-    GraphQL getGraphQl();
+    Object executeRequest(Map requestBody);
 }

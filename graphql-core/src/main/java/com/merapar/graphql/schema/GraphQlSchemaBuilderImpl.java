@@ -1,9 +1,7 @@
 package com.merapar.graphql.schema;
 
-import com.merapar.graphql.GraphQlException;
 import com.merapar.graphql.GraphQlProperties;
 import com.merapar.graphql.definitions.BaseGraphQlFields;
-import com.merapar.graphql.definitions.GraphQlFields;
 import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLSchema;
 import lombok.Getter;
@@ -11,11 +9,11 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 import static graphql.Scalars.GraphQLString;
 import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
@@ -26,22 +24,20 @@ import static graphql.schema.GraphQLObjectType.newObject;
 @Slf4j
 public class GraphQlSchemaBuilderImpl implements GraphQlSchemaBuilder {
 
-    private ApplicationContext applicationContext;
     private GraphQlProperties properties;
+    private List<BaseGraphQlFields> graphQlFieldsDefinitions;
 
     @Getter
     private GraphQLSchema schema;
 
     @Autowired
-    public GraphQlSchemaBuilderImpl(ApplicationContext applicationContext, GraphQlProperties properties) {
-        this.applicationContext = applicationContext;
+    public GraphQlSchemaBuilderImpl(GraphQlProperties properties, List<BaseGraphQlFields> graphQlFieldsDefinitions) {
         this.properties = properties;
+        this.graphQlFieldsDefinitions = graphQlFieldsDefinitions;
     }
 
     @PostConstruct
-    public void postContruct() {
-
-        log.debug("Start building graphql schema");
+    public void postConstruct() {
 
         GraphQLObjectType.Builder queryBuilder = newObject().name(properties.getRootQueryName());
         GraphQLObjectType.Builder mutationBuilder = newObject().name(properties.getRootMutationName());
@@ -54,37 +50,33 @@ public class GraphQlSchemaBuilderImpl implements GraphQlSchemaBuilder {
             mutationBuilder = mutationBuilder.description(properties.getRootMutationDescription());
         }
 
-        val fieldDefinitionBeans = applicationContext.getBeansWithAnnotation(GraphQlFields.class);
+        buildSchemaFromDefinitions(queryBuilder, mutationBuilder);
+    }
 
-        log.debug("Found following field definition components " + fieldDefinitionBeans.keySet());
-
-        boolean foundMutationDefinitions = false;
+    private void buildSchemaFromDefinitions(GraphQLObjectType.Builder queryBuilder, GraphQLObjectType.Builder mutationBuilder) {
         boolean foundQueryDefinitions = false;
+        boolean foundMutationDefinitions = false;
 
-        for (val fieldDefinition : fieldDefinitionBeans.entrySet()) {
+        for(val graphQlFieldsDefinition : graphQlFieldsDefinitions){
 
-            if (!(fieldDefinition.getValue() instanceof BaseGraphQlFields)) {
-                throw new GraphQlException(String.format("\"GraphQlFields\" annotation found on class \"%s\" without implementing interface \"BaseGraphQlFields\"", fieldDefinition.getKey()));
+            val queryFields = graphQlFieldsDefinition.getQueryFields();
+            if (queryFields != null && queryFields.size() > 0) {
+                queryBuilder = queryBuilder.fields(queryFields);
+                foundQueryDefinitions = true;
             }
 
-            val fieldDefinitionInterface = (BaseGraphQlFields) fieldDefinition.getValue();
-
-            if (fieldDefinitionInterface.getQueryFields() != null) {
-                val queryFields = fieldDefinitionInterface.getQueryFields();
-                if (queryFields != null && queryFields.size() > 0) {
-                    queryBuilder = queryBuilder.fields(queryFields);
-                    foundQueryDefinitions = true;
-                }
-            }
-
-            if (fieldDefinitionInterface.getMutationFields() != null) {
-                val mutationFields = fieldDefinitionInterface.getMutationFields();
-                if (mutationFields != null && mutationFields.size() > 0) {
-                    mutationBuilder = mutationBuilder.fields(mutationFields);
-                    foundMutationDefinitions = true;
-                }
+            val mutationFields = graphQlFieldsDefinition.getMutationFields();
+            if (mutationFields != null && mutationFields.size() > 0) {
+                mutationBuilder = mutationBuilder.fields(mutationFields);
+                foundMutationDefinitions = true;
             }
         }
+
+        buildSchema(queryBuilder, mutationBuilder, foundQueryDefinitions, foundMutationDefinitions);
+    }
+
+    private void buildSchema(GraphQLObjectType.Builder queryBuilder, GraphQLObjectType.Builder mutationBuilder, boolean foundQueryDefinitions, boolean foundMutationDefinitions) {
+        log.debug("Start building graphql schema");
 
         GraphQLSchema.Builder schemaBuilder = GraphQLSchema.newSchema();
 
