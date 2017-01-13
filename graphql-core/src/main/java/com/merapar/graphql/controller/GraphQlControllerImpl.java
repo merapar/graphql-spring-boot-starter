@@ -1,6 +1,6 @@
 package com.merapar.graphql.controller;
 
-import com.merapar.graphql.processor.GraphQlProcessor;
+import com.merapar.graphql.executor.GraphQlExecutor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.UUID;
 public class GraphQlControllerImpl implements GraphQlController {
 
     @Autowired
-    private GraphQlProcessor graphQlProcessor;
+    private GraphQlExecutor graphQlExecutor;
 
     @CrossOrigin
     @RequestMapping(
@@ -29,7 +29,7 @@ public class GraphQlControllerImpl implements GraphQlController {
         val uuid = UUID.randomUUID().toString();
 
         log.debug("Start processing graphQL request {}", uuid);
-        val requestResult = graphQlProcessor.processRequest(body);
+        val requestResult = graphQlExecutor.executeRequest(body);
         log.debug("Finished processing graphQL request {}", uuid);
 
         return requestResult;

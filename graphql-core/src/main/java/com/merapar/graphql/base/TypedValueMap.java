@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @EqualsAndHashCode
-@ToString
 public class TypedValueMap {
     private Map<String, Object> map;
 
