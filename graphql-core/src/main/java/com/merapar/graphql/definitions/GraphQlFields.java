@@ -1,11 +1,10 @@
 package com.merapar.graphql.definitions;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import graphql.schema.GraphQLFieldDefinition;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface GraphQlFields {
+import java.util.List;
+
+public interface GraphQlFields {
+    List<GraphQLFieldDefinition> getQueryFields();
+    List<GraphQLFieldDefinition> getMutationFields();
 }

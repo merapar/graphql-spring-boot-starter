@@ -1,8 +1,6 @@
 package com.merapar.graphql.controller.data;
 
-import com.merapar.graphql.base.AbstractBaseGraphQlFields;
-import com.merapar.graphql.definitions.BaseGraphQlFields;
-import com.merapar.graphql.definitions.GraphQlFields;
+import com.merapar.graphql.base.AbstractGraphQlFields;
 import graphql.Scalars;
 import graphql.schema.*;
 import lombok.Getter;
@@ -21,8 +19,7 @@ import static graphql.schema.GraphQLInputObjectField.newInputObjectField;
 import static graphql.schema.GraphQLInputObjectType.newInputObject;
 import static graphql.schema.GraphQLObjectType.newObject;
 
-@GraphQlFields
-public class UserFields extends AbstractBaseGraphQlFields implements BaseGraphQlFields {
+public class UserFields extends AbstractGraphQlFields {
 
     @Autowired
     private UserDataFetcher userDataFetcher;

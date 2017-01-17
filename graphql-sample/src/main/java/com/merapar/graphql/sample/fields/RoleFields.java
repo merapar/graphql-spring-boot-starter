@@ -1,8 +1,6 @@
 package com.merapar.graphql.sample.fields;
 
-import com.merapar.graphql.base.AbstractBaseGraphQlFields;
-import com.merapar.graphql.definitions.BaseGraphQlFields;
-import com.merapar.graphql.definitions.GraphQlFields;
+import com.merapar.graphql.base.AbstractGraphQlFields;
 import com.merapar.graphql.sample.dataFetchers.RoleDataFetcher;
 import graphql.Scalars;
 import graphql.schema.*;
@@ -24,8 +22,7 @@ import static graphql.schema.GraphQLInputObjectType.newInputObject;
 import static graphql.schema.GraphQLObjectType.newObject;
 
 @Component
-@GraphQlFields
-public class RoleFields extends AbstractBaseGraphQlFields implements BaseGraphQlFields {
+public class RoleFields extends AbstractGraphQlFields {
 
     @Autowired
     private RoleDataFetcher roleDataFetcher;
