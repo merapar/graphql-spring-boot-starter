@@ -2,9 +2,9 @@ package com.merapar.graphql.executor;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.merapar.graphql.GraphQlException;
 import com.merapar.graphql.schema.GraphQlSchemaBuilder;
 import graphql.GraphQL;
+import graphql.GraphQLException;
 import graphql.execution.ExecutorServiceExecutionStrategy;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -103,7 +103,7 @@ public class GraphQlExecutorImpl implements GraphQlExecutor {
         } else if (variablesFromRequest instanceof Map) {
             return (Map<String, Object>) variablesFromRequest;
         } else {
-            throw new GraphQlException("Incorrect variables");
+            throw new GraphQLException("Incorrect variables");
         }
 
         return Collections.emptyMap();
@@ -113,7 +113,7 @@ public class GraphQlExecutorImpl implements GraphQlExecutor {
         try {
             return jacksonObjectMapper.readValue(variablesFromRequest, typeRefReadJsonString);
         } catch (IOException exception) {
-            throw new GraphQlException("Cannot parse variables", exception);
+            throw new GraphQLException("Cannot parse variables", exception);
         }
     }
 }

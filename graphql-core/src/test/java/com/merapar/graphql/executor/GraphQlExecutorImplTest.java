@@ -1,6 +1,6 @@
 package com.merapar.graphql.executor;
 
-import com.merapar.graphql.GraphQlException;
+import graphql.GraphQLException;
 import lombok.val;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +32,7 @@ public class GraphQlExecutorImplTest {
         val exception = assertThatThrownBy(() -> graphQlExecutor.executeRequest(request));
 
         // Then
-        exception.isExactlyInstanceOf(GraphQlException.class).hasMessage("Cannot parse variables");
+        exception.isExactlyInstanceOf(GraphQLException.class).hasMessage("Cannot parse variables");
     }
 
     @Test
@@ -47,7 +47,7 @@ public class GraphQlExecutorImplTest {
         val exception = assertThatThrownBy(() -> graphQlExecutor.executeRequest(request));
 
         // Then
-        exception.isExactlyInstanceOf(GraphQlException.class).hasMessage("Incorrect variables");
+        exception.isExactlyInstanceOf(GraphQLException.class).hasMessage("Incorrect variables");
     }
 
     @Test
