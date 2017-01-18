@@ -1,8 +1,7 @@
 package com.merapar.graphql.sample.fields;
 
-import com.merapar.graphql.base.AbstractBaseGraphQlFields;
-import com.merapar.graphql.definitions.BaseGraphQlFields;
-import com.merapar.graphql.definitions.GraphQlFields;
+import com.merapar.graphql.base.GraphQlFieldsHelper;
+import com.merapar.graphql.GraphQlFields;
 import com.merapar.graphql.sample.dataFetchers.RoleDataFetcher;
 import graphql.Scalars;
 import graphql.schema.*;
@@ -24,8 +23,7 @@ import static graphql.schema.GraphQLInputObjectType.newInputObject;
 import static graphql.schema.GraphQLObjectType.newObject;
 
 @Component
-@GraphQlFields
-public class RoleFields extends AbstractBaseGraphQlFields implements BaseGraphQlFields {
+public class RoleFields implements GraphQlFields {
 
     @Autowired
     private RoleDataFetcher roleDataFetcher;
@@ -87,29 +85,29 @@ public class RoleFields extends AbstractBaseGraphQlFields implements BaseGraphQl
         rolesField = newFieldDefinition()
                 .name("roles").description("Provide an overview of all roles")
                 .type(new GraphQLList(roleType))
-                .argument(newArgument().name(FILTER).type(filterRoleInputType).build())
-                .dataFetcher(environment -> roleDataFetcher.getRolesByFilter(getFilterMap(environment)))
+                .argument(newArgument().name(GraphQlFieldsHelper.FILTER).type(filterRoleInputType).build())
+                .dataFetcher(environment -> roleDataFetcher.getRolesByFilter(GraphQlFieldsHelper.getFilterMap(environment)))
                 .build();
 
         addRoleField = newFieldDefinition()
                 .name("addRole").description("Add new role")
                 .type(roleType)
-                .argument(newArgument().name(INPUT).type(new GraphQLNonNull(addRoleInputType)).build())
-                .dataFetcher(environment -> roleDataFetcher.addRole(getInputMap(environment)))
+                .argument(newArgument().name(GraphQlFieldsHelper.INPUT).type(new GraphQLNonNull(addRoleInputType)).build())
+                .dataFetcher(environment -> roleDataFetcher.addRole(GraphQlFieldsHelper.getInputMap(environment)))
                 .build();
 
         updateRoleField = newFieldDefinition()
                 .name("updateRole").description("Update existing role")
                 .type(roleType)
-                .argument(newArgument().name(INPUT).type(new GraphQLNonNull(updateRoleInputType)).build())
-                .dataFetcher(environment -> roleDataFetcher.updateRole(getInputMap(environment)))
+                .argument(newArgument().name(GraphQlFieldsHelper.INPUT).type(new GraphQLNonNull(updateRoleInputType)).build())
+                .dataFetcher(environment -> roleDataFetcher.updateRole(GraphQlFieldsHelper.getInputMap(environment)))
                 .build();
 
         deleteRoleField = newFieldDefinition()
                 .name("deleteRole").description("Delete existing role")
                 .type(roleType)
-                .argument(newArgument().name(INPUT).type(new GraphQLNonNull(deleteRoleInputType)).build())
-                .dataFetcher(environment -> roleDataFetcher.deleteRole(getInputMap(environment)))
+                .argument(newArgument().name(GraphQlFieldsHelper.INPUT).type(new GraphQLNonNull(deleteRoleInputType)).build())
+                .dataFetcher(environment -> roleDataFetcher.deleteRole(GraphQlFieldsHelper.getInputMap(environment)))
                 .build();
     }
 }

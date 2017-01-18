@@ -1,7 +1,7 @@
 package com.merapar.graphql.schema;
 
 import com.merapar.graphql.GraphQlProperties;
-import com.merapar.graphql.definitions.BaseGraphQlFields;
+import com.merapar.graphql.GraphQlFields;
 import graphql.AssertException;
 import graphql.schema.GraphQLFieldDefinition;
 import lombok.val;
@@ -94,12 +94,12 @@ public class GraphQlSchemaBuilderImplTest {
         assertThat(schema.getQueryType().getName()).isEqualTo("gettingStartedQuery");
     }
 
-    private List<BaseGraphQlFields> getGraphQlFields(BaseGraphQlFields... fields)
+    private List<GraphQlFields> getGraphQlFields(GraphQlFields... fields)
     {
         return Arrays.asList(fields);
     }
 
-    class DummyGraphQlFieldWithBase extends DummyGraphQlFieldsWithoutBase implements BaseGraphQlFields {
+    class DummyGraphQlFieldWithBase extends DummyGraphQlFieldsWithoutBase implements GraphQlFields {
 
         public DummyGraphQlFieldWithBase(boolean includeQueryField, boolean includeMutationField) {
             super(includeQueryField, includeMutationField);

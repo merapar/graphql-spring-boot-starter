@@ -23,7 +23,7 @@ This is a Spring boot starter project for the [GraphQL Java](https://github.com/
 
 The implementation is based on Spring boot starter web project that will expose the GraphQL endpoint as rest controller.
 
-It takes care of exposing a rest endpoint with all configured graphQL fields automatically, using a simple annotation.
+It takes care of exposing a rest endpoint with all configured graphQL fields automatically.
 
 The library aims for real-life usage in production with the ease of Spring Boot.
 
@@ -33,15 +33,13 @@ The library aims for real-life usage in production with the ease of Spring Boot.
 Check out the following documentation on [using spring boot starter](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter) project.
 
 By adding Spring boot starter GraphQL as maven dependency on the application a @Controller will be created pointing to the configured request mapping with default "/v1/graphql".
-During startup all components that have the @GraphQlFields annotation and implements the interface "GraphQlFields" will be applied on the GraphQL schema exposed by the controller.
+During startup all components that implement "GraphQlFields" interface will be applied on the GraphQL schema exposed by the controller.
 
 An example from the sample project:
 ```java
 package com.merapar.graphql.sample.fields;
 
-import com.merapar.graphql.base.AbstractBaseGraphQlFields;
-import com.merapar.graphql.definitions.BaseGraphQlFields;
-import com.merapar.graphql.definitions.GraphQlFields;
+import com.merapar.graphql.GraphQlFields;
 import graphql.schema.GraphQLFieldDefinition;
 import org.springframework.stereotype.Component;
 
@@ -52,8 +50,7 @@ import static graphql.Scalars.GraphQLString;
 import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
 
 @Component
-@GraphQlFields
-public class HelloWorldFields extends AbstractBaseGraphQlFields implements BaseGraphQlFields {
+public class HelloWorldFields implements GraphQlFields {
 
     @Override
     public List<GraphQLFieldDefinition> getQueryFields() {

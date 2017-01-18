@@ -1,8 +1,6 @@
 package com.merapar.graphql.sample.fields;
 
-import com.merapar.graphql.base.AbstractBaseGraphQlFields;
-import com.merapar.graphql.definitions.BaseGraphQlFields;
-import com.merapar.graphql.definitions.GraphQlFields;
+import com.merapar.graphql.GraphQlFields;
 import graphql.schema.GraphQLFieldDefinition;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +11,7 @@ import static graphql.Scalars.GraphQLString;
 import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
 
 @Component
-@GraphQlFields
-public class HelloWorldFields extends AbstractBaseGraphQlFields implements BaseGraphQlFields {
+public class HelloWorldFields implements GraphQlFields {
 
     @Override
     public List<GraphQLFieldDefinition> getQueryFields() {
