@@ -1,4 +1,4 @@
-package com.merapar.graphql.definitions;
+package com.merapar.graphql;
 
 import graphql.schema.GraphQLFieldDefinition;
 

@@ -1,7 +1,7 @@
 package com.merapar.graphql.schema;
 
 import com.merapar.graphql.GraphQlProperties;
-import com.merapar.graphql.definitions.GraphQlFields;
+import com.merapar.graphql.GraphQlFields;
 import graphql.AssertException;
 import graphql.schema.GraphQLFieldDefinition;
 import lombok.val;

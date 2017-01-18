@@ -1,7 +1,7 @@
 package com.merapar.graphql.schema;
 
 import com.merapar.graphql.GraphQlProperties;
-import com.merapar.graphql.definitions.GraphQlFields;
+import com.merapar.graphql.GraphQlFields;
 import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLSchema;
 import lombok.Getter;
@@ -101,7 +101,7 @@ public class GraphQlSchemaBuilderImpl implements GraphQlSchemaBuilder {
                 .field(newFieldDefinition()
                         .type(GraphQLString)
                         .name("gettingStarted")
-                        .staticValue("Create a component and extend the AbstractGraphQlFields class."))
+                        .staticValue("Create a component and implement GraphQlFields interface."))
                 .build();
 
         return GraphQLSchema.newSchema()

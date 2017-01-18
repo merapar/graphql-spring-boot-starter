@@ -1,6 +1,7 @@
 package com.merapar.graphql.sample.fields;
 
-import com.merapar.graphql.base.AbstractGraphQlFields;
+import com.merapar.graphql.base.GraphQlFieldsHelper;
+import com.merapar.graphql.GraphQlFields;
 import com.merapar.graphql.sample.dataFetchers.UserDataFetcher;
 import com.merapar.graphql.sample.domain.User;
 import graphql.Scalars;
@@ -23,7 +24,7 @@ import static graphql.schema.GraphQLInputObjectType.newInputObject;
 import static graphql.schema.GraphQLObjectType.newObject;
 
 @Component
-public class UserFields extends AbstractGraphQlFields {
+public class UserFields implements GraphQlFields {
 
     @Autowired
     private UserDataFetcher userDataFetcher;
@@ -90,29 +91,29 @@ public class UserFields extends AbstractGraphQlFields {
         usersField = newFieldDefinition()
                 .name("users").description("Provide an overview of all users")
                 .type(new GraphQLList(userType))
-                .argument(newArgument().name(FILTER).type(filterUserInputType).build())
-                .dataFetcher(environment -> userDataFetcher.getUsersByFilter(getFilterMap(environment)))
+                .argument(newArgument().name(GraphQlFieldsHelper.FILTER).type(filterUserInputType).build())
+                .dataFetcher(environment -> userDataFetcher.getUsersByFilter(GraphQlFieldsHelper.getFilterMap(environment)))
                 .build();
 
         addUserField = newFieldDefinition()
                 .name("addUser").description("Add new user")
                 .type(userType)
-                .argument(newArgument().name(INPUT).type(new GraphQLNonNull(addUserInputType)).build())
-                .dataFetcher(environment -> userDataFetcher.addUser(getInputMap(environment)))
+                .argument(newArgument().name(GraphQlFieldsHelper.INPUT).type(new GraphQLNonNull(addUserInputType)).build())
+                .dataFetcher(environment -> userDataFetcher.addUser(GraphQlFieldsHelper.getInputMap(environment)))
                 .build();
 
         updateUserField = newFieldDefinition()
                 .name("updateUser").description("Update existing user")
                 .type(userType)
-                .argument(newArgument().name(INPUT).type(new GraphQLNonNull(updateUserInputType)).build())
-                .dataFetcher(environment -> userDataFetcher.updateUser(getInputMap(environment)))
+                .argument(newArgument().name(GraphQlFieldsHelper.INPUT).type(new GraphQLNonNull(updateUserInputType)).build())
+                .dataFetcher(environment -> userDataFetcher.updateUser(GraphQlFieldsHelper.getInputMap(environment)))
                 .build();
 
         deleteUserField = newFieldDefinition()
                 .name("deleteUser").description("Delete existing user")
                 .type(userType)
-                .argument(newArgument().name(INPUT).type(new GraphQLNonNull(deleteUserInputType)).build())
-                .dataFetcher(environment -> userDataFetcher.deleteUser(getInputMap(environment)))
+                .argument(newArgument().name(GraphQlFieldsHelper.INPUT).type(new GraphQLNonNull(deleteUserInputType)).build())
+                .dataFetcher(environment -> userDataFetcher.deleteUser(GraphQlFieldsHelper.getInputMap(environment)))
                 .build();
     }
 }

@@ -5,15 +5,15 @@ import graphql.schema.DataFetchingEnvironment;
 import java.util.Collections;
 import java.util.Map;
 
-public abstract class AbstractBaseGraphQlFields {
-    protected static String INPUT = "input";
-    protected static String FILTER = "filter";
+public class GraphQlFieldsHelper {
+    public static String INPUT = "input";
+    public static String FILTER = "filter";
 
-    protected TypedValueMap getInputMap(DataFetchingEnvironment environment) {
+    public static TypedValueMap getInputMap(DataFetchingEnvironment environment) {
         return new TypedValueMap(environment.getArgument(INPUT));
     }
 
-    protected TypedValueMap getFilterMap(DataFetchingEnvironment environment) {
+    public static TypedValueMap getFilterMap(DataFetchingEnvironment environment) {
         Map<String, Object> filterMap = environment.getArgument(FILTER);
 
         if (filterMap == null) {
