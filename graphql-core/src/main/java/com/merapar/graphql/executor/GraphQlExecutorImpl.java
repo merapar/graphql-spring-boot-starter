@@ -15,7 +15,10 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -75,8 +78,8 @@ public class GraphQlExecutorImpl implements GraphQlExecutor {
         val query = (String) requestBody.get("query");
         val operationName = (String) requestBody.get("operationName");
         val variables = getVariablesFromRequest(requestBody);
-
-        val executionResult = graphQL.execute(query, operationName, null, variables);
+        val context = new HashMap<String, Object>();
+        val executionResult = graphQL.execute(query, operationName, context, variables);
 
         val result = new LinkedHashMap<String, Object>();
 
