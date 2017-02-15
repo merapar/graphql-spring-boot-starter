@@ -17,7 +17,7 @@ public class GraphQlFieldsHelper {
         Map<String, Object> filterMap = environment.getArgument(FILTER);
 
         if (filterMap == null) {
-            return new TypedValueMap(Collections.emptyMap());
+            return new TypedValueMap();
         }
 
         return new TypedValueMap(filterMap);

@@ -1,14 +1,18 @@
 package com.merapar.graphql.base;
 
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @EqualsAndHashCode
 public class TypedValueMap {
+
     private Map<String, Object> map;
+
+    public TypedValueMap() {
+        this(null);
+    }
 
     public TypedValueMap(Map<String, Object> map) {
         this.map = map == null ? new HashMap<>() : map;
