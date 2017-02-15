@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -70,6 +71,7 @@ public class GraphQlExecutorImpl implements GraphQlExecutor {
                  *  If all the threads are working, then the caller thread
                  *  should execute the code in its own thread. (serially)
                  */
+                new CustomizableThreadFactory("graphql-thread-"),
                 new ThreadPoolExecutor.CallerRunsPolicy()));
     }
 
