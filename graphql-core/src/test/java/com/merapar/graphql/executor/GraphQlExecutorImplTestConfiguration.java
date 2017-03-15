@@ -27,5 +27,5 @@ public class GraphQlExecutorImplTestConfiguration {
     public GraphQlExecutorProperties graphQlProcessorProperties() { return new GraphQlExecutorProperties();}
 
     @Bean
-    public GraphQlExecutor graphQlProcessor() { return new GraphQlExecutorImpl(objectMapper(), schema, graphQlProcessorProperties());}
+    public GraphQlExecutor graphQlProcessor() { return new GraphQlExecutorImpl();}
 }

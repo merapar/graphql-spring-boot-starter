@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.merapar.graphql.schema.GraphQlSchemaBuilder;
 import graphql.GraphQL;
 import graphql.GraphQLException;
+import graphql.execution.ExecutionStrategy;
 import graphql.execution.ExecutorServiceExecutionStrategy;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -29,27 +30,25 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class GraphQlExecutorImpl implements GraphQlExecutor {
 
+    @Autowired
     private GraphQlExecutorProperties processorProperties;
+
+    @Autowired
     private ObjectMapper jacksonObjectMapper;
+
+    @Autowired
     private GraphQlSchemaBuilder schemaBuilder;
 
     private TypeReference<HashMap<String, Object>> typeRefReadJsonString = new TypeReference<HashMap<String, Object>>() {};
 
     private GraphQL graphQL;
 
-    @Autowired
-    public GraphQlExecutorImpl(ObjectMapper jacksonObjectMapper, GraphQlSchemaBuilder schemaBuilder, GraphQlExecutorProperties processorProperties) {
-        this.jacksonObjectMapper = jacksonObjectMapper;
-        this.schemaBuilder = schemaBuilder;
-        this.processorProperties = processorProperties;
-    }
-
     @PostConstruct
     private void postConstruct() {
         graphQL = new GraphQL(schemaBuilder.getSchema(), createExecutionStrategy());
     }
 
-    private ExecutorServiceExecutionStrategy createExecutionStrategy() {
+    protected ExecutionStrategy createExecutionStrategy() {
         val queue = new LinkedBlockingQueue<Runnable>() {
             @Override
             public boolean offer(Runnable e) {
@@ -75,12 +74,17 @@ public class GraphQlExecutorImpl implements GraphQlExecutor {
                 new ThreadPoolExecutor.CallerRunsPolicy()));
     }
 
+    protected void beforeExecuteRequest(String query, String operationName, Map<String, Object> context, Map<String, Object> variables) {
+    }
+
     @Override
     public Object executeRequest(Map requestBody) {
         val query = (String) requestBody.get("query");
         val operationName = (String) requestBody.get("operationName");
         val variables = getVariablesFromRequest(requestBody);
         val context = new HashMap<String, Object>();
+
+        beforeExecuteRequest(query, operationName, context, variables);
         val executionResult = graphQL.execute(query, operationName, context, variables);
 
         val result = new LinkedHashMap<String, Object>();
