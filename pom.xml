@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.merapar</groupId>
-    <artifactId>spring-boot-starter-graphql-parent</artifactId>
+    <artifactId>graphql-spring-boot-starter-parent</artifactId>
     <version>1.0.2-alpha</version>
     <packaging>pom</packaging>
 
@@ -13,15 +13,15 @@
         <version>1.4.3.RELEASE</version>
     </parent>
 
-    <name>spring-boot-starter-graphql-parent</name>
+    <name>graphql-spring-boot-starter-parent</name>
     <description>This is a Spring boot starter project for the GraphQL Java project.</description>
-    <url>https://github.com/merapar/spring-boot-starter-graphql</url>
+    <url>https://github.com/merapar/graphql-spring-boot-starter</url>
     <inceptionYear>2016</inceptionYear>
 
     <licenses>
         <license>
             <name>MIT</name>
-            <url>https://github.com/merapar/spring-boot-starter-graphql/blob/master/LICENSE.md</url>
+            <url>https://github.com/merapar/graphql-spring-boot-starter/blob/master/LICENSE.md</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -36,9 +36,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/merapar/spring-boot-starter-graphql.git</connection>
-        <developerConnection>scm:git:ssh://github.com:merapar/spring-boot-starter-graphql.git</developerConnection>
-        <url>http://github.com/merapar/spring-boot-starter-graphql/tree/master</url>
+        <connection>scm:git:git://github.com/merapar/graphql-spring-boot-starter.git</connection>
+        <developerConnection>scm:git:ssh://github.com:merapar/graphql-spring-boot-starter.git</developerConnection>
+        <url>http://github.com/merapar/graphql-spring-boot-starter/tree/master</url>
     </scm>
 
     <properties>

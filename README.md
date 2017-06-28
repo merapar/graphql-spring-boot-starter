@@ -1,7 +1,7 @@
-[![Build Status](https://api.travis-ci.org/merapar/spring-boot-starter-graphql.svg?branch=master)](https://travis-ci.org/merapar/spring-boot-starter-graphql)
-[![Code coverage](https://codecov.io/gh/merapar/spring-boot-starter-graphql/branch/master/graph/badge.svg)](https://codecov.io/gh/merapar/spring-boot-starter-graphql)
-[![Latest Release](https://maven-badges.herokuapp.com/maven-central/com.merapar/spring-boot-starter-graphql/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.merapar/spring-boot-starter-graphql/)
-[![Dev version](https://api.bintray.com/packages/merapar/maven/spring-boot-starter-graphql/images/download.svg)](https://bintray.com/merapar/maven/spring-boot-starter-graphql/_latestVersion)
+[![Build Status](https://api.travis-ci.org/merapar/graphql-spring-boot-starter.svg?branch=master)](https://travis-ci.org/merapar/graphql-spring-boot-starter)
+[![Code coverage](https://codecov.io/gh/merapar/graphql-spring-boot-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/merapar/graphql-spring-boot-starter)
+[![Latest Release](https://maven-badges.herokuapp.com/maven-central/com.merapar/graphql-spring-boot-starter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.merapar/graphql-spring-boot-starter/)
+[![Dev version](https://api.bintray.com/packages/merapar/maven/graphql-spring-boot-starter/images/download.svg)](https://bintray.com/merapar/maven/graphql-spring-boot-starter/_latestVersion)
 
 # Spring boot starter GraphQL
 
@@ -98,7 +98,7 @@ Dependency:
 ```xml
 <dependency>
     <groupId>com.merapar</groupId>
-    <artifactId>spring-boot-starter-graphql</artifactId>
+    <artifactId>graphql-spring-boot-starter</artifactId>
     <version>1.0.1</version>
 </dependency>
 
@@ -123,7 +123,7 @@ Dependency:
 ```xml
 <dependency>
     <groupId>com.merapar</groupId>
-    <artifactId>spring-boot-starter-graphql</artifactId>
+    <artifactId>graphql-spring-boot-starter</artifactId>
     <version>1.0.2-alpha</version>
 </dependency>
 
@@ -132,7 +132,7 @@ Dependency:
 
 ### Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/merapar/spring-boot-starter-graphql/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/merapar/graphql-spring-boot-starter/tags). 
 
 
 ### Code of Conduct

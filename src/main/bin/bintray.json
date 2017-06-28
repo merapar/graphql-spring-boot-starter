@@ -1,11 +1,11 @@
 {
   "package": {
-    "name": "spring-boot-starter-graphql",
+    "name": "graphql-spring-boot-starter",
     "repo": "maven",
     "subject": "merapar",
     "website_url": "https://www.merapartechnologies.com",
-    "issue_tracker_url": "https://github.com/merapar/spring-boot-starter-graphql/issues",
-    "vcs_url": "https://github.com/merapar/spring-boot-starter-graphql",
+    "issue_tracker_url": "https://github.com/merapar/graphql-spring-boot-starter/issues",
+    "vcs_url": "https://github.com/merapar/graphql-spring-boot-starter",
     "licenses": ["MIT"],
     "public_download_numbers": false,
     "public_stats": false
@@ -16,8 +16,8 @@
   },
   "files":
   [
-    {"includePattern": "graphql-core/target/(.*.jar)", "uploadPattern": "com/merapar/spring-boot-starter-graphql/@project.version@/$1", "matrixParams": { "override": 1 }},
-    {"includePattern": "graphql-core/pom.xml", "uploadPattern": "com/merapar/spring-boot-starter-graphql/@project.version@/spring-boot-starter-graphql-@project.version@.pom", "matrixParams": { "override": 1 }}
+    {"includePattern": "graphql-core/target/(.*.jar)", "uploadPattern": "com/merapar/graphql-spring-boot-starter/@project.version@/$1", "matrixParams": { "override": 1 }},
+    {"includePattern": "graphql-core/pom.xml", "uploadPattern": "com/merapar/graphql-spring-boot-starter/@project.version@/graphql-spring-boot-starter-@project.version@.pom", "matrixParams": { "override": 1 }}
   ],
   "publish": true
 }
