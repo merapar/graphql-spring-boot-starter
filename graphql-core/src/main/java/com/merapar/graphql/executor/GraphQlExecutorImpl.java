@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -49,13 +49,7 @@ public class GraphQlExecutorImpl implements GraphQlExecutor {
     }
 
     protected ExecutionStrategy createExecutionStrategy() {
-        val queue = new LinkedBlockingQueue<Runnable>() {
-            @Override
-            public boolean offer(Runnable e) {
-                    /* queue that always rejects tasks */
-                return false;
-            }
-        };
+        val queue = new SynchronousQueue<Runnable>();
 
         return new ExecutorServiceExecutionStrategy(new ThreadPoolExecutor(
                 processorProperties.getMinimumThreadPoolSize(), /* core pool size 2 thread */
