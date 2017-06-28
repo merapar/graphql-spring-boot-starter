@@ -9,14 +9,37 @@ public class GraphQlExecutorProperties {
 
     @Getter
     @Setter
-    private Integer minimumThreadPoolSize = 10;
+    private Integer minimumThreadPoolSizeQuery = 10;
 
     @Getter
     @Setter
-    private Integer maximumThreadPoolSize = 20;
+    private Integer maximumThreadPoolSizeQuery = 20;
 
     @Getter
     @Setter
-    private Integer keepAliveTimeInSeconds = 30;
+    private Integer keepAliveTimeInSecondsQuery = 30;
 
+    @Getter
+    @Setter
+    private Integer minimumThreadPoolSizeMutation = 10;
+
+    @Getter
+    @Setter
+    private Integer maximumThreadPoolSizeMutation = 20;
+
+    @Getter
+    @Setter
+    private Integer keepAliveTimeInSecondsMutation = 30;
+
+    @Getter
+    @Setter
+    private Integer minimumThreadPoolSizeSubscription = 10;
+
+    @Getter
+    @Setter
+    private Integer maximumThreadPoolSizeSubscription = 20;
+
+    @Getter
+    @Setter
+    private Integer keepAliveTimeInSecondsSubscription = 30;
 }

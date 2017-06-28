@@ -39,33 +39,61 @@ public class GraphQlExecutorImpl implements GraphQlExecutor {
     @Autowired
     private GraphQlSchemaBuilder schemaBuilder;
 
-    private TypeReference<HashMap<String, Object>> typeRefReadJsonString = new TypeReference<HashMap<String, Object>>() {};
+    private TypeReference<HashMap<String, Object>> typeRefReadJsonString = new TypeReference<HashMap<String, Object>>() {
+    };
 
     private GraphQL graphQL;
 
     @PostConstruct
     private void postConstruct() {
-        graphQL = new GraphQL(schemaBuilder.getSchema(), createExecutionStrategy());
+        graphQL = createGraphQL();
     }
 
-    protected ExecutionStrategy createExecutionStrategy() {
-        val queue = new SynchronousQueue<Runnable>();
+    protected GraphQL createGraphQL() {
+        return GraphQL.newGraphQL(schemaBuilder.getSchema())
+                .queryExecutionStrategy(createQueryExecutionStrategy())
+                .mutationExecutionStrategy(createMutationExecutionStrategy())
+                .subscriptionExecutionStrategy(createSubscriptionExecutionStrategy())
+                .build();
+    }
 
+    protected ExecutionStrategy createQueryExecutionStrategy() {
+        return createExecutionStrategy(
+                processorProperties.getMinimumThreadPoolSizeQuery(),
+                processorProperties.getMaximumThreadPoolSizeQuery(),
+                processorProperties.getKeepAliveTimeInSecondsQuery(),
+                "graphql-query-thread-"
+        );
+    }
+
+    protected ExecutionStrategy createMutationExecutionStrategy() {
+        return createExecutionStrategy(
+                processorProperties.getMinimumThreadPoolSizeMutation(),
+                processorProperties.getMaximumThreadPoolSizeMutation(),
+                processorProperties.getKeepAliveTimeInSecondsMutation(),
+                "graphql-mutation-thread-"
+        );
+    }
+
+    protected ExecutionStrategy createSubscriptionExecutionStrategy() {
+        return createExecutionStrategy(
+                processorProperties.getMinimumThreadPoolSizeSubscription(),
+                processorProperties.getMaximumThreadPoolSizeSubscription(),
+                processorProperties.getKeepAliveTimeInSecondsSubscription(),
+                "graphql-subscription-thread-"
+        );
+    }
+
+    private ExecutionStrategy createExecutionStrategy(Integer minimumThreadPoolSize, Integer maximumThreadPoolSize, Integer keepAliveTimeInSeconds, String threadNamePrefix) {
         return new ExecutorServiceExecutionStrategy(new ThreadPoolExecutor(
-                processorProperties.getMinimumThreadPoolSize(), /* core pool size 2 thread */
-                processorProperties.getMaximumThreadPoolSize(), /* max pool size 2 thread */
-                processorProperties.getKeepAliveTimeInSeconds(),
+                minimumThreadPoolSize,
+                maximumThreadPoolSize,
+                keepAliveTimeInSeconds,
                 TimeUnit.SECONDS,
-                /*
-                 * Do not use the queue to prevent threads waiting on enqueued tasks.
-                 */
-                queue,
-                /*
-                 *  If all the threads are working, then the caller thread
-                 *  should execute the code in its own thread. (serially)
-                 */
-                new CustomizableThreadFactory("graphql-thread-"),
-                new ThreadPoolExecutor.CallerRunsPolicy()));
+                new SynchronousQueue<>(),
+                new CustomizableThreadFactory(threadNamePrefix),
+                new ThreadPoolExecutor.CallerRunsPolicy())
+        );
     }
 
     protected void beforeExecuteRequest(String query, String operationName, Map<String, Object> context, Map<String, Object> variables) {
