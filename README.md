@@ -3,7 +3,7 @@
 [![Latest Release](https://maven-badges.herokuapp.com/maven-central/com.merapar/graphql-spring-boot-starter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.merapar/graphql-spring-boot-starter/)
 [![Dev version](https://api.bintray.com/packages/merapar/maven/graphql-spring-boot-starter/images/download.svg)](https://bintray.com/merapar/maven/graphql-spring-boot-starter/_latestVersion)
 
-# Spring boot starter GraphQL
+# GraphQL Spring boot starter
 
 This is a Spring boot starter project for the [GraphQL Java](https://github.com/graphql-java/graphql-java) project.
 
@@ -32,7 +32,7 @@ The library aims for real-life usage in production with the ease of Spring Boot.
 
 Check out the following documentation on [using spring boot starter](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter) project.
 
-By adding Spring boot starter GraphQL as maven dependency on the application a @Controller will be created pointing to the configured request mapping with default "/v1/graphql".
+By adding GraphQL Spring boot starter as maven dependency on the application a @Controller will be created pointing to the configured request mapping with default "/v1/graphql".
 During startup all components that implement "GraphQlFields" interface will be applied on the GraphQL schema exposed by the controller.
 
 An example from the sample project:
@@ -164,7 +164,7 @@ This implementation is based on the [graphql-java](https://github.com/graphql-ja
 
 ### License
 
-Spring boot starter GraphQL is licensed under the MIT License. See [LICENSE](LICENSE.md) for details.
+GraphQL Spring boot starter is licensed under the MIT License. See [LICENSE](LICENSE.md) for details.
 
 Copyright (c) 2016 Merapar Technologies
 
