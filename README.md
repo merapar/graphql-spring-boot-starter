@@ -84,9 +84,15 @@ com.merapar.graphql:
   requestMapping:
     path: "/v1/graphql"
   executor:
-    minimumThreadPoolSize: 10
-    maximumThreadPoolSize: 20
-    keepAliveTimeInSeconds: 30
+    minimumThreadPoolSizeQuery: 10
+    maximumThreadPoolSizeQuery: 20
+    keepAliveTimeInSecondsQuery: 30
+    minimumThreadPoolSizeMutation: 10
+    maximumThreadPoolSizeMutation: 20
+    keepAliveTimeInSecondsMutation: 30
+    minimumThreadPoolSizeSubscription: 10
+    maximumThreadPoolSizeSubscription: 20
+    keepAliveTimeInSecondsSubscription: 30
     
 ```
 
