@@ -26,11 +26,13 @@ public class GraphQlControllerImpl implements GraphQlController {
     )
     @ResponseBody
     public Object executeOperation(@RequestBody Map body) {
+        val startTime = System.currentTimeMillis();
         val uuid = UUID.randomUUID().toString();
 
         log.debug("Start processing graphQL request {}", uuid);
         val requestResult = graphQlExecutor.executeRequest(body);
-        log.debug("Finished processing graphQL request {}", uuid);
+
+        log.debug("Finished processing graphQL request {} in {} ms", uuid, System.currentTimeMillis() - startTime);
 
         return requestResult;
     }
