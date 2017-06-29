@@ -130,7 +130,7 @@ Dependency:
 <dependency>
     <groupId>com.merapar</groupId>
     <artifactId>graphql-spring-boot-starter</artifactId>
-    <version>1.0.2-alpha</version>
+    <version>1.0.3-alpha</version>
 </dependency>
 
 ```

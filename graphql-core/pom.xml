@@ -4,7 +4,7 @@
 
     <groupId>com.merapar</groupId>
     <artifactId>graphql-spring-boot-starter</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3-alpha</version>
     <packaging>jar</packaging>
 
     <parent>
