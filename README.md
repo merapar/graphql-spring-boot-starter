@@ -1,3 +1,4 @@
+[![Join the chat at https://gitter.im/merapar/graphql-spring-boot-starter](https://badges.gitter.im/merapar/graphql-spring-boot-starter.svg)](https://gitter.im/merapar/graphql-spring-boot-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://api.travis-ci.org/merapar/graphql-spring-boot-starter.svg?branch=master)](https://travis-ci.org/merapar/graphql-spring-boot-starter)
 [![Code coverage](https://codecov.io/gh/merapar/graphql-spring-boot-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/merapar/graphql-spring-boot-starter)
 [![Latest Release](https://maven-badges.herokuapp.com/maven-central/com.merapar/graphql-spring-boot-starter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.merapar/graphql-spring-boot-starter/)
