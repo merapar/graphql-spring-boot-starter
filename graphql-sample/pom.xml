@@ -4,7 +4,7 @@
 
     <groupId>com.merapar</groupId>
     <artifactId>graphql-spring-boot-starter-sample</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3-alpha</version> 
     <packaging>jar</packaging>
 
     <parent>
@@ -12,6 +12,14 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.4.7.RELEASE</version>
     </parent>
+
+    <repositories>
+        <repository>
+            <id>bintray-merapar-maven</id>
+            <name>bintray</name>
+            <url>http://dl.bintray.com/merapar/maven</url>
+        </repository>
+    </repositories>
 
     <name>graphql-spring-boot-starter-sample</name>
     <description>This is a sample project for the Spring boot starter GraphQL project.</description>

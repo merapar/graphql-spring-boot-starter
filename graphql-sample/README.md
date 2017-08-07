@@ -7,7 +7,7 @@ The purpose of this readme is to get you started quickly.
 The endpoint can be found at `http://localhost:8080/v1/graphql`
 
 ## Graphql clients
-One example of a rest client with graphql support is [insomnia](https://insomnia.rest), [curl](https://curl.haxx.se/) can also be used.
+One example of a rest client with graphql support is [insomnia](https://insomnia.rest), [graphiql](https://github.com/graphql/graphiql) and [curl](https://curl.haxx.se/) can also be used.
 
 ## Examples
 
