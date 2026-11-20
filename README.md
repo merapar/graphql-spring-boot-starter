@@ -1,10 +1,11 @@
-[![Join the chat at https://gitter.im/merapar/graphql-spring-boot-starter](https://badges.gitter.im/merapar/graphql-spring-boot-starter.svg)](https://gitter.im/merapar/graphql-spring-boot-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://api.travis-ci.org/merapar/graphql-spring-boot-starter.svg?branch=master)](https://travis-ci.org/merapar/graphql-spring-boot-starter)
-[![Code coverage](https://codecov.io/gh/merapar/graphql-spring-boot-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/merapar/graphql-spring-boot-starter)
-[![Latest Release](https://maven-badges.herokuapp.com/maven-central/com.merapar/graphql-spring-boot-starter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.merapar/graphql-spring-boot-starter/)
-[![Dev version](https://api.bintray.com/packages/merapar/maven/graphql-spring-boot-starter/images/download.svg)](https://bintray.com/merapar/maven/graphql-spring-boot-starter/_latestVersion)
-
 # GraphQL Spring boot starter
+
+> [!WARNING]
+> **This project is no longer maintained.**
+>
+> This repository is archived and kept for reference only. It was built for early versions of Spring Boot and GraphQL Java and receives no updates or security fixes. Do not use it in new projects.
+>
+> For GraphQL on Spring Boot, use the official [Spring for GraphQL](https://spring.io/projects/spring-graphql) project instead.
 
 This is a Spring boot starter project for the [GraphQL Java](https://github.com/graphql-java/graphql-java) project.
 
